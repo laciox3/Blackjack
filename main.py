@@ -1,3 +1,9 @@
+# blackjack
+#
+# uwagi:
+#   - wartosc asa zle sie liczy
+#       (istnieje sytacja w ktorej as liczy sie jako 11 a moze jako 1)
+
 import random
 
 class Card:
@@ -63,6 +69,7 @@ def draw(deck, who, score):
             print("WYNIK KRUPIERA: ", score["croupier"])
 
 
+#gra z komputerem
 
 if __name__ == "__main__":
     my_deck = Deck()
@@ -74,9 +81,13 @@ if __name__ == "__main__":
     print("---TURA GRACZA---")
 
     draw(my_deck, "player", score)
+    draw(my_deck, "player", score)
+
+    if score["player"] == 21:
+        print("wygrana!!!")
+        quit()
 
     while run == 'Y':
-        draw(my_deck, "player", score)
 
         if score["player"] > 21:
             print("przegrana!!!")
@@ -99,6 +110,6 @@ if __name__ == "__main__":
             break
 
 
-
+        draw(my_deck, "player", score)
 
 
