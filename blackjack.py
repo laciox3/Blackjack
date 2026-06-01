@@ -108,16 +108,3 @@ class Gra:
 
 #losuj___ losuje kartę i usuwa ją z talii, cofnij____ usuwa, przy za dużej ilości sie wywala czyli działa
 
-def main():
-
-    g=Gra(4)
-    g.losujkrupierowi()
-    print(g.kartykrupiera[g.ilkrupiera-1])
-    g.losujgraczowi()
-    print(g.kartygracza[g.ilgracza-1])
-    #wypisuje ostatnie
-    g.cofnijkrupierowi()
-    g.cofnijgraczowi()
-    #usuwa
-
-main()
