@@ -1,4 +1,6 @@
 import blackjack
+import stats # <--- Dodany import
+from inputimeout import inputimeout, TimeoutOccurred
 
 def oblicz_punkty(reka):
     punkty = 0
@@ -26,8 +28,6 @@ def wyswietl_reke(nazwa, reka):
     punkty = oblicz_punkty(reka)
     print(f"{nazwa}: [{karty_str}] (Punkty: {punkty})")
 
-
-
 def zagraj_partie():
     print("\n" + "="*30)
     print("       ROZDANIE KART")
@@ -49,9 +49,8 @@ def zagraj_partie():
         wyswietl_reke("Twoje karty", gra.kartygracza)
         print("Karta krupiera: " + str(gra.kartykrupiera[0]).strip())
         
-        
         print("\nBLACKJACK!")
-        return 
+        return 1 
     # ------------------------------------------------
     
     # TURA GRACZA
@@ -65,20 +64,27 @@ def zagraj_partie():
         
         if punkty_gracza > 21:
             print("\nPrzekroczyłeś 21! Krupier wygrywa.")
-            return
+            return -1
             
         if punkty_gracza == 21:
             print("\nMasz 21 punktów! Koniec dobierania.")
             break 
-            
-        decyzja = input("\nChcesz dobrać kartę (D) czy pasować (P)? [D/P]: ").lower()
+
+
+     
+        try:
+            decyzja = inputimeout(prompt="\nChcesz dobrać kartę (D) czy pasować (P)? [D/P] (masz 15 sekund!): ", timeout=15.0).lower()
+        except TimeoutOccurred:
+            print("\n\nCzas minął! Automatycznie pasujesz (P).")
+            decyzja = 'p' 
+    
         
         if decyzja == 'd':
             gra.losujgraczowi()
             print("-> Dobierasz kartę...\n")
         elif decyzja == 'p':
             print("-> Pasujesz.\n")
-            break
+            break 
         else:
             print("! Nieznana komenda. Wpisz 'D' lub 'P'.")
 
@@ -105,24 +111,51 @@ def zagraj_partie():
     
     if punkty_krupiera > 21:
         print("Krupier przekroczył 21! WYGRYWASZ!")
+        return 1 
     elif punkty_gracza > punkty_krupiera:
         print(f"Wygrywasz! (Ty: {punkty_gracza} vs Krupier: {punkty_krupiera})")
+        return 1 
     elif punkty_gracza < punkty_krupiera:
         print(f"Przegrywasz! (Ty: {punkty_gracza} vs Krupier: {punkty_krupiera})")
+        return -1 
     else:
         print(f"Remis! Obaj macie {punkty_gracza} pkt.")
+        return 0 
 
 def main():
     print("Miłej zabawy przy grze w Blackjacka!")
     
+    moje_staty = stats.wczytaj()
+    stats.wyswietl(moje_staty)
+    
     while True:
-        zagraj_partie()
+        wynik = zagraj_partie()
         
-        # Pytanie o kolejną grę
-        jeszcze_raz = input("\nCzy chcesz zagrać kolejną partię? (T/N): ").lower()
+        if wynik == 1:
+            moje_staty["wygrane"] += 1
+        elif wynik == -1:
+            moje_staty["przegrane"] += 1
+        elif wynik == 0:
+            moje_staty["remisy"] += 1
+            
+        stats.zapisz(moje_staty)
+        
+       
+        try:
+            jeszcze_raz = inputimeout(prompt="\nCzy chcesz zagrać jeszcze jedną partię? tak/nie: [t]/[n](masz 15 sekund!): ", timeout=15.0).lower()
+        except TimeoutOccurred:
+            print("\n\nCzas minął! Automatycznie pasujesz (P).")
+            jeszcze_raz = 'n'
+
         if jeszcze_raz != 't':
+            stats.wyswietl(moje_staty)
             print("\nDzięki za grę!")
+            input("\nNaciśnij Enter, aby zamknąć okno...") 
             break
 
 if __name__ == "__main__":
     main()
+
+
+
+      
