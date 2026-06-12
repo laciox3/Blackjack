@@ -2,10 +2,8 @@ import blackjack
 import stats
 from inputimeout import inputimeout, TimeoutOccurred
 
-# --- TWOJE IMPORTY ---
 import kasa
 import historia
-# ---------------------
 
 def oblicz_punkty(reka):
     punkty = 0
