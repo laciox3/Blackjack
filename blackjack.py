@@ -102,8 +102,8 @@ class Gra:
         self.ilkrupiera -= 1
 
     def cofnijgraczowi(self):
-        self.talia[random.randint(0, len(self.talia) - 1)].append(self.kartygracza[self.ilgracza - 1])
-        self.kartygracza.remove(self.kartygracza[self.ilgracza - 1])
+        ostatnia_karta = self.kartygracza.pop()
+        self.talia[random.randint(0, len(self.talia) - 1)].append(ostatnia_karta)
         self.ilgracza -= 1
 
 #losuj___ losuje kartę i usuwa ją z talii, cofnij____ usuwa, przy za dużej ilości sie wywala czyli działa
