@@ -37,7 +37,10 @@ def zagraj_partie():
     print("="*30)
     
     # INICJALIZACJA GRY
-    gra = blackjack.Gra(4)
+    il_talii=-1
+    while(il_talii < 0 or il_talii > 8):
+        il_talii = inputimeout(prompt="\nProszę podać na ile talii kart chcesz grać 1-8 talii (masz 15 sekund!): ", timeout=15.0).lower()
+    gra = blackjack.Gra(il_talii)
     historia_gry = historia.HistoriaRuchow() #Inicjalizacja historii
     
     # ROZDANIE POCZĄTKOWE
