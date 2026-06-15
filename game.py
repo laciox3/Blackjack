@@ -32,21 +32,21 @@ def wyswietl_reke(nazwa, reka):
     print(f"{nazwa}: [{karty_str}] (Punkty: {punkty})")
 
 def zagraj_partie():
-    print("\n" + "="*30)
-    print("        ROZDANIE KART")
-    print("="*30)
-    
     # INICJALIZACJA GRY
     il_talii = 0
     while(il_talii <= 0 or il_talii > 8):
-        str_talii = input("\nProszę podać na ile talii kart chcesz grać 1-8 talii:")
+        str_talii = input("\nProszę podać na ile talii kart chcesz grać (1-8): ")
         if str_talii != "8" and str_talii != "1" and str_talii != "2" and str_talii != "3" and str_talii != "4" and str_talii != "5" and str_talii != "6" and str_talii != "7":
-            print("proszę podać liczbę z zakresu")
+            print("Nieprawidłowa liczba talii!")
         else:
             il_talii = int(str_talii)
     gra = blackjack.Gra(il_talii)
     historia_gry = historia.HistoriaRuchow() #Inicjalizacja historii
     
+    print("\n" + "="*30)
+    print("        ROZDANIE KART")
+    print("="*30)
+
     # ROZDANIE POCZĄTKOWE
     gra.losujgraczowi()
     gra.losujgraczowi()
@@ -102,7 +102,7 @@ def zagraj_partie():
 
     # TURA KRUPIERA
     print("-" * 30)
-    print("TURA KRUPIERA")
+    print("        TURA KRUPIERA")
     print("-" * 30)
     
     punkty_krupiera = oblicz_punkty(gra.kartykrupiera)
