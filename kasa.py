@@ -34,6 +34,9 @@ class Kasa:
         if wynik == 1:
             self.saldo += stawka
             print(f"WYGRANA! Zyskujesz {stawka} PLN.")
+        elif wynik == 2:
+            self.saldo += (stawka*1.5)
+            print("BLACKJACK! Zyskujesz ", stawka*1.5, " PLN.")
         elif wynik == -1:
             self.saldo -= stawka
             print(f"PRZEGRANA. Tracisz {stawka} PLN.")
