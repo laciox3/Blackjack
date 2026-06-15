@@ -39,7 +39,11 @@ def zagraj_partie():
     # INICJALIZACJA GRY
     il_talii = 0
     while(il_talii <= 0 or il_talii > 8):
-        il_talii = int(input("\nProszę podać na ile talii kart chcesz grać 1-8 talii: "))
+        str_talii = input("\nProszę podać na ile talii kart chcesz grać 1-8 talii:")
+        if str_talii != "8" and str_talii != "1" and str_talii != "2" and str_talii != "3" and str_talii != "4" and str_talii != "5" and str_talii != "6" and str_talii != "7":
+            print("proszę podać liczbę z zakresu")
+        else:
+            il_talii = int(str_talii)
     gra = blackjack.Gra(il_talii)
     historia_gry = historia.HistoriaRuchow() #Inicjalizacja historii
     
