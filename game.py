@@ -57,7 +57,7 @@ def zagraj_partie():
         print("Karta krupiera: " + str(gra.kartykrupiera[0]).strip())
         
         print("\nBLACKJACK!")
-        return 1 
+        return 2 
     # ------------------------------------------------
     
     # TURA GRACZA
