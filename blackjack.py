@@ -69,7 +69,7 @@ class Talia:
 
 
 class Gra:
-    def __init__(self, il):
+    def __init__(self, il=4):
         self.gra = ""
         #string gdzie wrzuca się co gracz zrobił
         self.talia = [Talia() for i in range (il)]
@@ -105,5 +105,5 @@ class Gra:
         self.talia[random.randint(0, len(self.talia) - 1)].append(self.kartygracza[self.ilgracza - 1])
         self.kartygracza.remove(self.kartygracza[self.ilgracza - 1])
         self.ilgracza -= 1
-#losuj___ losuje kartę i usuwa ją z talii, cofnij____ usuwa, przy za dużej ilości sie wywala czyli działa
+#losuj___ losuje kartę i usuwa ją z talii, cofnij cofa
 
